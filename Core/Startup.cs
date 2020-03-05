@@ -38,6 +38,7 @@ namespace Core
                 app.UseDeveloperExceptionPage ();
             }
 
+            app.UseDefaultFiles ();
             app.UseStaticFiles ();
 
             app.Use (async (context, next) =>
