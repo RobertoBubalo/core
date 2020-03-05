@@ -33,16 +33,16 @@ namespace Core
             // Middleware -> Handles http request or response
             // Short circuiting the middleware
 
+            // Essentially has to be the first MW to be used
             if (env.IsDevelopment ())
             {
                 app.UseDeveloperExceptionPage ();
             }
 
-            app.UseDefaultFiles ();
-            app.UseStaticFiles ();
-
+            //app.UseDefaultFiles ();
+            //app.UseStaticFiles ();
             // can be used instead of previous two, but has directory browsing included as well!
-            //app.UseFileServer ();
+            app.UseFileServer ();
 
             app.Use (async (context, next) =>
             {
