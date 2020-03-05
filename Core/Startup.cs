@@ -41,6 +41,9 @@ namespace Core
             app.UseDefaultFiles ();
             app.UseStaticFiles ();
 
+            // can be used instead of previous two, but has directory browsing included as well!
+            //app.UseFileServer ();
+
             app.Use (async (context, next) =>
             {
                 logger.LogInformation ("mw1: Incoming request");
