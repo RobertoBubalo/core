@@ -2,9 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Core.Controllers;
+using Core.Interfaces;
+using Core.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -14,7 +18,6 @@ namespace Core
     public class Startup
     {
         private IConfiguration _config;
-        private IServiceCollection _services;
 
         public Startup (IConfiguration config)
         {
@@ -24,7 +27,13 @@ namespace Core
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices (IServiceCollection services)
         {
-            _services = services;
+            //MvcOptions options = new MvcOptions();
+            //options.EnableEndpointRouting = false;
+            //services.AddMvc(options);
+            // the previous code does not work since it won't accept options...
+            services.AddMvc(option => option.EnableEndpointRouting = false);//.AddXmlSerializerFormatters();
+            // dependency injection
+            services.AddSingleton<IEmployeeRepository, MockEmployeeRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -40,9 +49,11 @@ namespace Core
             }
 
             //app.UseDefaultFiles ();
-            //app.UseStaticFiles ();
+            app.UseStaticFiles();
             // can be used instead of previous two, but has directory browsing included as well!
-            app.UseFileServer ();
+            //app.UseFileServer ();
+
+            app.UseMvcWithDefaultRoute();
 
             app.Use (async (context, next) =>
             {
