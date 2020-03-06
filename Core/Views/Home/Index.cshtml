@@ -1,0 +1,42 @@
+﻿@model IEnumerable<Core.Models.Employee>
+
+@{ 
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Employees";
+}
+
+<style>
+
+table, td, th {
+  border: 1px solid black;
+}
+#table {
+  border-collapse: collapse;
+}
+</style>
+
+<table id="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Department</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var employee in Model)
+        {
+            <tr>
+                <td>
+                    @employee.Id
+                </td>
+                <td>
+                    @employee.Name
+                </td>
+                <td>
+                    @employee.Department
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

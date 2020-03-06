@@ -1,6 +1,16 @@
-﻿
+﻿@model Core.ViewModels.Home.HomeDetailsViewModel
+
 @{
-    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = Model.PageTitle;
 }
 
-<h1>Details</h1>
+<div>
+    Name: @Model.Employee.Name
+</div>
+<div>
+    Email: @Model.Employee.Email
+</div>
+<div>
+    Department: @Model.Employee.Department
+</div>

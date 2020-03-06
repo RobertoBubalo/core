@@ -3,32 +3,37 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Core.Interfaces;
+using Core.ViewModels.Home;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Core.Controllers
 {
     public class HomeController : Controller
     {
-        private IEmployeeRepository _employeeRepository;
+        private readonly IEmployeeRepository _employeeRepository;
 
         public HomeController(IEmployeeRepository employeeRepository)
         {
             _employeeRepository = employeeRepository;
         }
 
-        public string Index()
+        public ViewResult Index()
         {
-            return _employeeRepository.GetEmployee(1).Name;
+            var viewResult = View (_employeeRepository.GetAllEmployees ());
+            return viewResult;
         }
 
-        public ViewResult Details()
+        public ViewResult Details(int id)
         {
-            var model = _employeeRepository.GetEmployee(1);
-            return View(model);
+            HomeDetailsViewModel homeDetailsViewModel = new HomeDetailsViewModel ()
+            {
+                Employee = _employeeRepository.GetEmployee (id),
+                PageTitle = "Employee Details"
+            };
+
+            return View (homeDetailsViewModel);
         }
-        //public IActionResult Index()
-        //{
-        //    return View();
-        //}
+
+
     }
 }

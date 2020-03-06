@@ -17,11 +17,11 @@ namespace Core
 {
     public class Startup
     {
-        private IConfiguration _config;
 
+#pragma warning disable IDE0060 // Remove unused parameter
         public Startup (IConfiguration config)
+#pragma warning restore IDE0060 // Remove unused parameter
         {
-            _config = config;
         }
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
