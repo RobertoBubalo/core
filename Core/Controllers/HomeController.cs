@@ -34,6 +34,10 @@ namespace Core.Controllers
             return View (homeDetailsViewModel);
         }
 
+        public ViewResult Create()
+        {
+            return View();
+        }
 
     }
 }
