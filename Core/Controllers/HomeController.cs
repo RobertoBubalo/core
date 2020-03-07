@@ -23,11 +23,11 @@ namespace Core.Controllers
             return viewResult;
         }
 
-        public ViewResult Details(int id)
+        public ViewResult Details(int? id)
         {
             HomeDetailsViewModel homeDetailsViewModel = new HomeDetailsViewModel ()
             {
-                Employee = _employeeRepository.GetEmployee (id),
+                Employee = _employeeRepository.GetEmployee (id??1),
                 PageTitle = "Employee Details"
             };
 

@@ -53,25 +53,10 @@ namespace Core
             // can be used instead of previous two, but has directory browsing included as well!
             //app.UseFileServer ();
 
-            app.UseMvcWithDefaultRoute();
-
-            app.Use (async (context, next) =>
+            //app.UseMvcWithDefaultRoute();
+            app.UseMvc(configureRoutes =>
             {
-                logger.LogInformation ("mw1: Incoming request");
-                await next ();
-                logger.LogInformation ("mw1: Outgoing response");
-            });
-
-            app.Use (async (context, next) =>
-            {
-                logger.LogInformation ("mw2: Incoming request");
-                await next ();
-                logger.LogInformation ("mw2: Outgoing response");
-            });
-
-            app.Run (async (context) =>
-            {
-                await context.Response.WriteAsync ("Hello from second middleware!");
+                configureRoutes.MapRoute("default", "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

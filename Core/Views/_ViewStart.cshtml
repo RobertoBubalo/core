@@ -1,0 +1,17 @@
+﻿@* This is where we declare layout which is loaded in all views*@
+
+@{
+    Layout = "_Layout";
+}
+
+@* This is how we separate UI based on the user privileges *@
+@*@{
+        if (User.IsInRole("Admin"))
+        {
+            Layout = "_AdminLayout";
+        }
+        else
+        {
+            Layout = "_NonAdminLayout";
+        }
+    }*@
