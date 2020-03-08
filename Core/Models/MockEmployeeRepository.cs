@@ -27,5 +27,12 @@ namespace Core.Models
         {
             return _employees;
         }
+
+        public Employee AddEmployee(Employee employee)
+        {
+            employee.Id = _employees.Max(e => e.Id) + 1;
+            _employees.Add(employee);
+            return employee;
+        }
     }
 }

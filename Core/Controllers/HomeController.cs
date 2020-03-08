@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Core.Interfaces;
+using Core.Models;
 using Core.ViewModels.Home;
 using Microsoft.AspNetCore.Mvc;
 
@@ -27,6 +28,7 @@ namespace Core.Controllers
         {
             HomeDetailsViewModel homeDetailsViewModel = new HomeDetailsViewModel ()
             {
+                // TODO: id hardcoded to 1 if none passed -> handle this case.
                 Employee = _employeeRepository.GetEmployee (id??1),
                 PageTitle = "Employee Details"
             };
@@ -34,10 +36,22 @@ namespace Core.Controllers
             return View (homeDetailsViewModel);
         }
 
+        [HttpGet]
         public ViewResult Create()
         {
             return View();
         }
 
+        [HttpPost]
+        public IActionResult Create(Employee employee)
+        {
+            if (ModelState.IsValid)
+            {
+                _employeeRepository.AddEmployee(employee);
+                return RedirectToAction("Details", new { Id = employee.Id });
+            }
+
+            return View();
+        }
     }
 }
