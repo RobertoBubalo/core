@@ -8,8 +8,10 @@ namespace Core.Interfaces
 {
     public interface IEmployeeRepository
     {
-        Employee GetEmployee(int id);
-        IEnumerable<Employee> GetAllEmployees ();
-        Employee AddEmployee(Employee employee);
+        Employee Get(int id);
+        Employee Add(Employee employee);
+        Employee Update(Employee employee);
+        Employee Delete(int id);
+        IEnumerable<Employee> GetAll ();
     }
 }
