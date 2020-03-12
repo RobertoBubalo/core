@@ -20,6 +20,6 @@ namespace Core.Models
         [Required]
         public Department? Department { get; set; }
 
-        public string Imagepath { get; set; }
+        public string ImagePath { get; set; }
     }
 }

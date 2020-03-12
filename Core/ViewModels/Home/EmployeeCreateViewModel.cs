@@ -11,7 +11,7 @@ namespace Core.ViewModels.Home
     {
         public string Name { get; set; }
         public string Email { get; set; }
-        public Department Department { get; set; }
+        public Department? Department { get; set; }
         public IFormFile Photo { get; set; }
     }
 }

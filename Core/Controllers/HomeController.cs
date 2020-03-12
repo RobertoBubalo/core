@@ -77,7 +77,7 @@ namespace Core.Controllers
                     Department = model.Department,
                     // Store the file name in PhotoPath property of the employee object
                     // which gets saved to the Employees database table
-                    Imagepath = uniqueFileName
+                    ImagePath = uniqueFileName
                 };
 
                 _employeeRepository.Add(newEmployee);
@@ -87,5 +87,20 @@ namespace Core.Controllers
             return View();
         }
 
+        [HttpGet]
+        public ViewResult Edit(int id)
+        {
+            Employee employee = _employeeRepository.Get(id);
+            EmployeeEditViewModel employeeEditViewModel = new EmployeeEditViewModel
+            {
+                Id = employee.Id,
+                Name = employee.Name,
+                Email = employee.Email,
+                Department = employee.Department,
+                ExistingImagePath = employee.ImagePath
+            };
+
+            return View(employeeEditViewModel);
+        }
     }
 }
